@@ -6,7 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.gd.prometrics.model.Student;
-import com.gd.prometrics.repository.*;
+import com.gd.prometrics.repository.IStudentRepository;
 
 import java.util.Optional;
 
