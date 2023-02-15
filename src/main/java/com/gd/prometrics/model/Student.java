@@ -1,16 +1,16 @@
 package com.gd.prometrics.model;
 import lombok.Data;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Data
-@jakarta.persistence.Entity
+@Entity
 @Table
 public class Student {
 
-  @jakarta.persistence.Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Id
+  @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
   private Long id;
   @NotBlank
   private String name;
