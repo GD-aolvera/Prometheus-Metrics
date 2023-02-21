@@ -2,7 +2,6 @@ package com.gd.prometrics;
 
 import io.micrometer.core.aop.TimedAspect;
 import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.elastic.ElasticMeterRegistry;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -22,7 +21,7 @@ public class PrometheusMetricsApplication {
 	}
 
 	@Bean
-	public TimedAspect timedAspect(ElasticMeterRegistry registry) {
+	public TimedAspect timedAspect(MeterRegistry registry) {
 		return new TimedAspect(registry);
 	}
 

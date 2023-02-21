@@ -4,7 +4,6 @@ import com.gd.prometrics.monitoring.CustomMetricsBean;
 import io.micrometer.core.annotation.Timed;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.elastic.ElasticMeterRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -43,7 +42,7 @@ public class StudentController {
     return deletedStudentsList::size;
   }
 
-  public StudentController (ElasticMeterRegistry registry){
+  public StudentController (MeterRegistry registry){
     //noinspection SpellCheckingInspection
     Gauge.builder("studentcontroller.studentcount",fetchStudentCount()).
         tag("version", "v1").

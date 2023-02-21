@@ -37,7 +37,7 @@ dependencies {
 	implementation 'co.elastic.apm:apm-agent-attach:1.36.0'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
-	implementation 'io.micrometer:micrometer-registry-elastic:1.10.4'
+	implementation 'io.micrometer:micrometer-registry-prometheus:1.10.4'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator:3.0.2'
@@ -50,4 +50,13 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+jar {
+	manifest {
+		attributes(
+				'Class-Path': configurations.collect { it.getName() }.join(' '),
+				'Main-Class': 'com.gd.prometrics.PrometheusMetricsApplication'
+		)
+	}
 }

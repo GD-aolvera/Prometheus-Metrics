@@ -7,7 +7,6 @@ import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.MultiGauge;
 import io.micrometer.core.instrument.Tags;
-import io.micrometer.elastic.ElasticMeterRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -43,7 +42,7 @@ public class CustomMetricsBean {
     return () -> studentController.fetchDeletedStudents().get();
   }
 
-  public CustomMetricsBean(ElasticMeterRegistry registry) {
+  public CustomMetricsBean(MeterRegistry registry) {
     studentSummary = MultiGauge.builder("student.age.details").tag("name", "age").register(registry);
     Gauge.builder("number.of.deleted.students", fetchDeletedStudentsCount()).register(registry);
   }
