@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -38,13 +39,22 @@ public class CustomMetricsBean {
         ,overWrite);
   }
 
+  public void updateStudentCount(ArrayList a, ArrayList b) {
+
+  }
+
   public Supplier<Number> fetchDeletedStudentsCount() {
     return () -> studentController.fetchDeletedStudents().get();
+  }
+
+  public Supplier<Number> fetchStudentsInDB() {
+    return () -> studentController.fetchStudentsInDB().get();
   }
 
   public CustomMetricsBean(MeterRegistry registry) {
     studentSummary = MultiGauge.builder("student.age.details").tag("name", "age").register(registry);
     Gauge.builder("number.of.deleted.students", fetchDeletedStudentsCount()).register(registry);
+    Gauge.builder("number.of.students.in.db", fetchStudentsInDB()).register(registry);
   }
 
 }
